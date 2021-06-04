@@ -1,12 +1,19 @@
 import { Button, Input, Image } from "react-native-elements";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import image from "../images/5098293.jpg";
 import { KeyboardAvoidingView } from "react-native";
+import { auth } from "../firebase";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+      }
+    });
+  }, [input])();
   const signIn = () => {};
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>

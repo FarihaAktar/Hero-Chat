@@ -3,6 +3,7 @@ import { StatusBar } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
+import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -15,7 +16,19 @@ const RegisterScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const register = () => {};
+  const register = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        authUser.user.update({
+          displayName: name,
+          photoURL: imageUrl || "hello",
+        });
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
