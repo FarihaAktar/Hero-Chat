@@ -14,7 +14,7 @@ const RegisterScreen = ({ navigation }) => {
     navigation.setOptions({
       headerBackTitle: "Back To Login",
     });
-  }, [navigation]);
+  }, []);
 
   const register = () => {
     auth
@@ -22,7 +22,9 @@ const RegisterScreen = ({ navigation }) => {
       .then((authUser) => {
         authUser.user.updateProfile({
           displayName: name,
-          photoURL: imageUrl || "hello",
+          photoURL:
+            imageUrl ||
+            "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
         });
       })
       .catch((err) => {

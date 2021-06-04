@@ -10,19 +10,24 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      console.log(authUser);
       if (authUser) {
         navigation.replace("Home");
       }
     });
     return unsubscribe;
   }, []);
-  const signIn = () => {};
+  const signIn = () => {
+    auth.signInWithEmailAndPassword(email, password).catch((err) => {
+      alert(err.message);
+    });
+  };
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar style="light" />
       <Image
         source={{
-          uri: "https://ibb.co/PCdGbKr",
+          uri: "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
         }}
         style={{ width: 200, height: 200 }}
       />
@@ -40,6 +45,7 @@ const LoginScreen = ({ navigation }) => {
           type="password"
           value={password}
           onChangeText={(text) => setPassword(text)}
+          onSubmitEditing={signIn}
         />
       </View>
       <Button containerStyle={styles.button} onPress={signIn} title="Login" />
