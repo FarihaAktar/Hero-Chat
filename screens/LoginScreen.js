@@ -9,11 +9,13 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
+        navigation.replace("Home");
       }
     });
-  }, [input])();
+    return unsubscribe;
+  }, []);
   const signIn = () => {};
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
