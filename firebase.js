@@ -1,8 +1,24 @@
+import firebase from "firebase/app";
+import "firebase/auth";
+
+import "firebase/firestore";
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDlOUcLpGo9_Ri0nu1AFtJD7t21rwueaXI",
-    authDomain: "hero-chat-7d336.firebaseapp.com",
-    projectId: "hero-chat-7d336",
-    storageBucket: "hero-chat-7d336.appspot.com",
-    messagingSenderId: "36665838537",
-    appId: "1:36665838537:web:882df1c2508fa37c937618"
-  };
+  apiKey: "AIzaSyAbnHVgHtwlmzaGtfaLXGZ0gyvPMTMJhsI",
+  authDomain: "react-native-2d514.firebaseapp.com",
+  projectId: "react-native-2d514",
+  storageBucket: "react-native-2d514.appspot.com",
+  messagingSenderId: "957568197087",
+  appId: "1:957568197087:web:20fda0057700687934646a",
+};
+let app;
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
+}
+
+const db = app.firestore();
+const auth = firebase.auth();
+
+export { db, auth };
